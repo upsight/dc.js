@@ -127,6 +127,7 @@ module.exports.jsFiles = [
     "src/cumulative.js",
     "src/base-chart.js",
     "src/marginable.js",
+    "src/axis-rendering.js",
     "src/coordinate-grid-chart.js",
     "src/color-chart.js",
     "src/stackable-chart.js",

@@ -32,7 +32,7 @@ dc.rowChart = function (parent, chartGroup) {
 
     var _rowCssClass = "row";
 
-    var _chart = dc.capped(dc.marginable(dc.colorChart(dc.baseChart({}))));
+    var _chart = dc.capped(dc.marginable(dc.axisRendering(dc.colorChart(dc.baseChart({})))));
 
     var _x;
 
@@ -65,7 +65,8 @@ dc.rowChart = function (parent, chartGroup) {
                 .attr("transform", "translate(0, " + _chart.effectiveHeight() + ")");
 
         dc.transition(axisG, _chart.transitionDuration())
-            .call(_xAxis);
+            .call(_xAxis)
+            .call(_chart._axisRenderlet, "y");
     }
 
     _chart.doRender = function () {

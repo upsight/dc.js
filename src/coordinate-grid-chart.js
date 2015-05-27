@@ -12,7 +12,7 @@ dc.coordinateGridChart = function (_chart) {
     var X_AXIS_LABEL_CLASS = 'x-axis-label';
     var DEFAULT_AXIS_LABLEL_PADDING = 12;
 
-    _chart = dc.colorChart(dc.marginable(dc.baseChart(_chart)));
+    _chart = dc.colorChart(dc.marginable(dc.axisRendering(dc.baseChart(_chart))));
 
     _chart.colors(d3.scale.category10());
 
@@ -325,7 +325,8 @@ dc.coordinateGridChart = function (_chart) {
             axisYLab.text(_chart.xAxisLabel());
 
         dc.transition(axisXG, _chart.transitionDuration())
-            .call(_xAxis);
+            .call(_xAxis)
+            .call(_chart._axisRenderlet, "x");
     };
 
     function renderVerticalGridLines(g) {
@@ -423,7 +424,8 @@ dc.coordinateGridChart = function (_chart) {
             axisYLab.text(_chart.yAxisLabel());
 
         dc.transition(axisYG, _chart.transitionDuration())
-            .call(_yAxis);
+            .call(_yAxis)
+            .call(_chart._axisRenderlet, "y");
     };
 
 
