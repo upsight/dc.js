@@ -1,5 +1,5 @@
 /*!
- *  dc 1.7.0-upsight.0.0.1
+ *  dc 1.7.0-upsight.0.0.2
  *  http://dc-js.github.io/dc.js/
  *  Copyright 2012 Nick Zhu and other contributors
  *
@@ -20,7 +20,7 @@
 'use strict';
 
 /**
-#### Version 1.7.0-upsight.0.0.1
+#### Version 1.7.0-upsight.0.0.2
 
 The entire dc.js library is scoped under **dc** name space. It does not introduce anything else into the global
 name space.
@@ -57,7 +57,7 @@ The API references will highlight the fact if a particular function is not chain
 
 **/
 var dc = {
-    version: "1.7.0-upsight.0.0.1",
+    version: "1.7.0-upsight.0.0.2",
     constants: {
         CHART_CLASS: "dc-chart",
         DEBUG_GROUP_CLASS: "debug",
@@ -1475,6 +1475,7 @@ dc.axisRendering = function (_chart) {
 
             tickTextElements.each(function() {
                 var text = d3.select(this);
+                var bbox = this.getBBox();
                 var transform = "";
 
                 if (options.translateX || options.translateY) {
@@ -1482,8 +1483,9 @@ dc.axisRendering = function (_chart) {
                 }
 
                 if (options.rotate) {
+                    transform += " translate(-" + ((bbox.width/2) - (Math.sin(Math.abs(options.rotate) * 180* Math.PI) * bbox.width/2)) + ")";
                     transform += " rotate(" + options.rotate + "," +
-                        (text.attr("x") || 0) + "," + (text.attr("y") || 0) + ")";
+                        (bbox.x + bbox.width) + "," + (bbox.y + (bbox.height/2)) + ")";
                 }
 
                 if (transform) {
