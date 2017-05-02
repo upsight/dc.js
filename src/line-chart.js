@@ -158,7 +158,7 @@ dc.lineChart = function (parent, chartGroup) {
     }
 
     function drawDots(layersEnter) {
-        if (!_chart.brushOn()) {
+        if (!_chart.brushOn() || _chart.forceTooltip()) {
             layersEnter.each(function (d, i) {
                 var layer = d3.select(this);
 

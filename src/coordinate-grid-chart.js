@@ -38,6 +38,7 @@ dc.coordinateGridChart = function (_chart) {
 
     var _brush = d3.svg.brush();
     var _brushOn = true;
+    var _forceTooltip = false;
     var _round;
 
     var _renderHorizontalGridLine = false;
@@ -865,6 +866,18 @@ dc.coordinateGridChart = function (_chart) {
     function hasRangeSelected(range) {
         return range instanceof Array && range.length > 1;
     }
+
+    /**
+    #### .forceTooltip([boolean])
+    Set or get the force tooltip flag (default: false). When turned on the chart will always display a tooltip
+    when showing multiple series, even when a brush filter is shown.
+
+    **/
+    _chart.forceTooltip = function (_) {
+        if (!arguments.length) return _forceTooltip;
+        _forceTooltip = _;
+        return _chart;
+    };
 
     /**
     #### .focus([range])
